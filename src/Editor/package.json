@@ -1,0 +1,36 @@
+{
+  "name": "react-text-editor",
+  "version": "1.0.6",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel editor.js -o index.js"
+  },
+  "keywords": [
+    "editor",
+    "rich-text-editor",
+    "react",
+    "react-text-editor"
+  ],
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aashu0148/react-text-editor"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.12.1",
+    "draft-js": "^0.11.7",
+    "react-icons": "^4.3.1"
+  },
+  "peerDependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.16.7",
+    "@babel/core": "^7.16.7",
+    "@babel/preset-env": "^7.16.7"
+  }
+}
