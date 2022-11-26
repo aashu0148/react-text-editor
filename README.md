@@ -1,22 +1,22 @@
-# cuvette-text-editor
+# react-text-editor
 
 
 A rich text editor for react, built over [draft.js](https://draftjs.org/)
 
-![cuvette-text-editor](cuvette-text-editor.gif)
+![react-text-editor](react-text-editor.gif)
 
 ---
 ## Installation and Usage
 
-The easiest way to install cuvette-text-editor is to install it via npm -
-`npm i cuvette-text-editor`
+The easiest way to install react-text-editor is to install it via npm -
+`npm i react-text-editor`
 
 Then use it in you app -
 
 ```javascript
 import React, { useState } from "react";
 
-import Editor from "cuvette-text-editor";
+import Editor from "react-text-editor";
 
 function MyComponent(props) {
   const initialValue = props.defaultState;
@@ -69,11 +69,11 @@ There are 2 ways of getting plane readable text -
     />
 ```
 
-- By importing `getPlaneTextFromEditorState` from `cuvette-text-editor` 
+- By importing `getPlaneTextFromEditorState` from `react-text-editor` 
 
 ```javascript
     
-import Editor, { getPlaneTextFromEditorState } from "cuvette-text-editor";
+import Editor, { getPlaneTextFromEditorState } from "react-text-editor";
 
 function App() {
   const [editorState, setEditorState] = useState("");
