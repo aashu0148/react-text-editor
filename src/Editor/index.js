@@ -1,48 +1,73 @@
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = Editor;
 exports.getPlaneTextFromEditorState = getPlaneTextFromEditorState;
+
 var _react = _interopRequireWildcard(require("react"));
+
 var _draftJs = require("draft-js");
+
 require("draft-js/dist/Draft.css");
+
 var _bi = require("react-icons/bi");
+
 var _ai = require("react-icons/ai");
+
 var _EditorModule = _interopRequireDefault(require("./Editor.module.css"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function Editor(_ref) {
   var _styleMap;
+
   var defaultState = _ref.defaultState,
-    placeholder = _ref.placeholder,
-    onChange = _ref.onChange,
-    getPlaneTextOnChange = _ref.getPlaneTextOnChange,
-    readOnly = _ref.readOnly,
-    error = _ref.error,
-    className = _ref.className,
-    toolbarClassName = _ref.toolbarClassName,
-    errorClassName = _ref.errorClassName,
-    toolbarToBottom = _ref.toolbarToBottom,
-    hideSeparator = _ref.hideSeparator,
-    colors = _ref.colors,
-    hiddenOptions = _ref.hiddenOptions;
+      placeholder = _ref.placeholder,
+      onChange = _ref.onChange,
+      getPlaneTextOnChange = _ref.getPlaneTextOnChange,
+      readOnly = _ref.readOnly,
+      error = _ref.error,
+      className = _ref.className,
+      toolbarClassName = _ref.toolbarClassName,
+      errorClassName = _ref.errorClassName,
+      toolbarToBottom = _ref.toolbarToBottom,
+      hideSeparator = _ref.hideSeparator,
+      colors = _ref.colors,
+      hiddenOptions = _ref.hiddenOptions;
   var keyCodes = {
     s: 83,
     b: 66,
@@ -125,31 +150,36 @@ function Editor(_ref) {
     type: "block"
   }];
   var containerRef = (0, _react.useRef)();
+
   var _useState = (0, _react.useState)([]),
-    _useState2 = _slicedToArray(_useState, 2),
-    editorOptions = _useState2[0],
-    setEditorOptions = _useState2[1];
+      _useState2 = _slicedToArray(_useState, 2),
+      editorOptions = _useState2[0],
+      setEditorOptions = _useState2[1];
+
   var _useState3 = (0, _react.useState)(_draftJs.EditorState.createEmpty()),
-    _useState4 = _slicedToArray(_useState3, 2),
-    editorState = _useState4[0],
-    setEditorState = _useState4[1];
+      _useState4 = _slicedToArray(_useState3, 2),
+      editorState = _useState4[0],
+      setEditorState = _useState4[1];
+
   var _useState5 = (0, _react.useState)({
-      bold: false,
-      italic: false,
-      underline: false,
-      ul: false,
-      ol: false,
-      code: false,
-      highlight: false,
-      strikethrough: false,
-      h1: false,
-      h2: false
-    }),
-    _useState6 = _slicedToArray(_useState5, 2),
-    activeOptions = _useState6[0],
-    setActiveOptions = _useState6[1];
+    bold: false,
+    italic: false,
+    underline: false,
+    ul: false,
+    ol: false,
+    code: false,
+    highlight: false,
+    strikethrough: false,
+    h1: false,
+    h2: false
+  }),
+      _useState6 = _slicedToArray(_useState5, 2),
+      activeOptions = _useState6[0],
+      setActiveOptions = _useState6[1];
+
   var changeActiveOption = function changeActiveOption(currentState) {
     var tempActiveOptions = _objectSpread({}, activeOptions);
+
     var currentStyle = currentState.getCurrentInlineStyle();
     var selection = currentState.getSelection();
     var blockType = currentState.getCurrentContent().getBlockForKey(selection.getStartKey()).getType();
@@ -165,13 +195,17 @@ function Editor(_ref) {
     if (blockType === blockOptions.h2) tempActiveOptions.h2 = true;else tempActiveOptions.h2 = false;
     setActiveOptions(tempActiveOptions);
   };
+
   var handleBlockTypeClick = function handleBlockTypeClick(option) {
     setActiveOptions(function (prev) {
       return _objectSpread(_objectSpread({}, prev), {}, _defineProperty({}, option.label, !prev[option.label]));
     });
+
     var state = _draftJs.RichUtils.toggleBlockType(editorState, option.value);
+
     setEditorState(state);
   };
+
   var handleInlineTypeClick = function handleInlineTypeClick(option) {
     if (editorState !== null && editorState !== void 0 && editorState.getCurrentInlineStyle().has(option.value)) {
       setActiveOptions(function (prev) {
@@ -182,92 +216,116 @@ function Editor(_ref) {
         return _objectSpread(_objectSpread({}, prev), {}, _defineProperty({}, option.label, true));
       });
     }
+
     var state = _draftJs.RichUtils.toggleInlineStyle(editorState, option.value);
+
     setEditorState(state);
   };
+
   var handleOptionMouseDown = function handleOptionMouseDown(event, item) {
     event.preventDefault();
+
     if (item.type == "inline") {
       handleInlineTypeClick(item);
     } else if (item.type == "block") {
       handleBlockTypeClick(item);
     }
   };
+
   var handleEditorOnChange = function handleEditorOnChange(currentState) {
     var contentState = currentState.getCurrentContent();
     var content;
+
     try {
       content = (0, _draftJs.convertToRaw)(contentState);
     } catch (err) {
       content = "";
     }
+
     var stringifyContent = JSON.stringify(content);
+
     if (onChange) {
       var _contentState$getPlai;
+
       if (contentState !== null && contentState !== void 0 && (_contentState$getPlai = contentState.getPlainText()) !== null && _contentState$getPlai !== void 0 && _contentState$getPlai.trim()) onChange(stringifyContent);else onChange("");
     }
+
     if (getPlaneTextOnChange) {
       getPlaneTextOnChange(contentState === null || contentState === void 0 ? void 0 : contentState.getPlainText());
     }
+
     changeActiveOption(currentState);
     setEditorState(currentState);
   };
+
   var handleKeyCommand = function handleKeyCommand(command) {
     var state = "";
+
     switch (command) {
       case inlineOptions.bold:
         {
           state = _draftJs.RichUtils.toggleInlineStyle(editorState, inlineOptions.bold);
           break;
         }
+
       case inlineOptions.italic:
         {
           state = _draftJs.RichUtils.toggleInlineStyle(editorState, inlineOptions.italic);
           break;
         }
+
       case inlineOptions.underline:
         {
           state = _draftJs.RichUtils.toggleInlineStyle(editorState, inlineOptions.underline);
           break;
         }
+
       case inlineOptions.highlight:
         {
           state = _draftJs.RichUtils.toggleInlineStyle(editorState, inlineOptions.highlight);
           break;
         }
+
       case inlineOptions.strikethrough:
         {
           state = _draftJs.RichUtils.toggleInlineStyle(editorState, inlineOptions.strikethrough);
           break;
         }
+
       case inlineOptions.code:
         {
           state = _draftJs.RichUtils.toggleInlineStyle(editorState, inlineOptions.code);
           break;
         }
+
       case blockOptions.ol:
         {
           state = _draftJs.RichUtils.toggleBlockType(editorState, blockOptions.ol);
           break;
         }
+
       case blockOptions.ul:
         {
           state = _draftJs.RichUtils.toggleBlockType(editorState, blockOptions.ul);
           break;
         }
+
       case blockOptions.h1:
         {
           state = _draftJs.RichUtils.toggleBlockType(editorState, blockOptions.h1);
           break;
         }
+
       case blockOptions.h2:
         {
           state = _draftJs.RichUtils.toggleBlockType(editorState, blockOptions.h2);
           break;
         }
+
       default:
         return "not-handled";
     }
+
     if (state) {
       setEditorState(state);
       changeActiveOption(state);
@@ -276,26 +334,33 @@ function Editor(_ref) {
       return "not-handled";
     }
   };
+
   var keyBindingFunction = function keyBindingFunction(event) {
     if (_draftJs.KeyBindingUtil.hasCommandModifier(event)) {
       if (event.keyCode === keyCodes.b) return inlineOptions.bold;else if (event.keyCode === keyCodes.i) return inlineOptions.italic;else if (event.keyCode === keyCodes.h) return inlineOptions.highlight;else if (event.keyCode === keyCodes.c && event.shiftKey) return inlineOptions.code;else if (event.keyCode === keyCodes.s && event.shiftKey) return inlineOptions.strikethrough;else if (event.keyCode === keyCodes.u) return inlineOptions.underline;else if (event.keyCode === keyCodes.o) return blockOptions.ol;else if (event.keyCode === keyCodes.l) return blockOptions.ul;
     }
+
     return (0, _draftJs.getDefaultKeyBinding)(event);
   };
+
   var generateEditorOptions = function generateEditorOptions() {
     if (Array.isArray(hiddenOptions) && (hiddenOptions === null || hiddenOptions === void 0 ? void 0 : hiddenOptions.length) > 0) {
       var hidden = _toConsumableArray(hiddenOptions);
+
       var resultedOptions = allEditorOptions.filter(function (item) {
         return (hidden === null || hidden === void 0 ? void 0 : hidden.findIndex(function (hiddenItem) {
           var _item$value;
+
           return hiddenItem !== null && hiddenItem !== void 0 && hiddenItem.toLowerCase ? hiddenItem.toLowerCase() === (item === null || item === void 0 ? void 0 : (_item$value = item.value) === null || _item$value === void 0 ? void 0 : _item$value.toLowerCase()) : false;
         })) < 0;
       });
       setEditorOptions(resultedOptions);
     } else setEditorOptions(allEditorOptions);
   };
+
   var assignColors = function assignColors() {
     var _containerRef$current, _containerRef$current2, _containerRef$current3;
+
     var primary = colors === null || colors === void 0 ? void 0 : colors.primary;
     var error = colors === null || colors === void 0 ? void 0 : colors.error;
     var options = colors === null || colors === void 0 ? void 0 : colors.options;
@@ -303,21 +368,25 @@ function Editor(_ref) {
     if (error) containerRef === null || containerRef === void 0 ? void 0 : (_containerRef$current2 = containerRef.current) === null || _containerRef$current2 === void 0 ? void 0 : _containerRef$current2.style.setProperty("--error", error);
     if (options) containerRef === null || containerRef === void 0 ? void 0 : (_containerRef$current3 = containerRef.current) === null || _containerRef$current3 === void 0 ? void 0 : _containerRef$current3.style.setProperty("--option", options);
   };
+
   (0, _react.useEffect)(function () {
     if (colors) {
       assignColors();
     }
+
     if (!defaultState) return;
+
     try {
       var _defaultState = _draftJs.EditorState.createWithContent((0, _draftJs.convertFromRaw)(JSON.parse(_defaultState)));
+
       setEditorState(_defaultState);
-    } catch (err) {
-      // do not do anything
+    } catch (err) {// do not do anything
     }
   }, []);
   (0, _react.useEffect)(function () {
     generateEditorOptions();
   }, [hiddenOptions]);
+
   var toolbar = /*#__PURE__*/_react.default.createElement("div", {
     className: "".concat(_EditorModule.default.toolbar, " ").concat(toolbarClassName ? toolbarClassName : "")
   }, editorOptions.map(function (item, index) {
@@ -331,6 +400,7 @@ function Editor(_ref) {
       title: "".concat(item.label, " ").concat(item.shortcut ? "(".concat(item.shortcut, ")") : "")
     }, /*#__PURE__*/_react.default.createElement("span", null, item.icon ? /*#__PURE__*/_react.default.createElement(item.icon, null) : item.label));
   }));
+
   var styleMap = (_styleMap = {}, _defineProperty(_styleMap, inlineOptions.highlight, {
     backgroundColor: (colors === null || colors === void 0 ? void 0 : colors.highlight) || "#faed27"
   }), _defineProperty(_styleMap, inlineOptions.code, {
@@ -360,13 +430,16 @@ function Editor(_ref) {
     className: _EditorModule.default.separator
   }), toolbar) : "");
 }
+
 function getPlaneTextFromEditorState(state) {
   if (!state) return "";
   var currentState;
+
   try {
     currentState = _draftJs.EditorState.createWithContent((0, _draftJs.convertFromRaw)(JSON.parse(state)));
   } catch (err) {
     return "";
   }
+
   return currentState.getCurrentContent().getPlainText();
 }

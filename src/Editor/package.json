@@ -1,6 +1,6 @@
 {
-  "name": "react-text-editor",
-  "version": "1.0.6",
+  "name": "@aashu0148/react-text-editor",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
     "editor",
     "rich-text-editor",
     "react",
-    "react-text-editor"
+    "@aashu0148/react-text-editor"
   ],
   "author": "",
   "license": "ISC",

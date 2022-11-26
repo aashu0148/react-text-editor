@@ -1,25 +1,25 @@
-# react-text-editor
+# @aashu0148/react-text-editor
 
 
 A rich text editor for react, built over [draft.js](https://draftjs.org/)
 
-![react-text-editor](react-text-editor.gif)
+![@aashu0148/react-text-editor](react-text-editor.gif)
 
 ---
 ## Installation and Usage
 
-The easiest way to install react-text-editor is to install it via npm -
-`npm i react-text-editor`
+The easiest way to install @aashu0148/react-text-editor is to install it via npm -
+`npm i @aashu0148/react-text-editor`
 
 Then use it in you app -
 
 ```javascript
 import React, { useState } from "react";
 
-import Editor from "react-text-editor";
+import Editor from "@aashu0148/react-text-editor";
 
-function MyComponent(props) {
-  const initialValue = props.defaultState;
+function MyComponent({defaultState}) {
+  const initialValue = defaultState;
   const [editorValue, setEditorValue] = useState(initialValue);
 
   return (
@@ -69,11 +69,11 @@ There are 2 ways of getting plane readable text -
     />
 ```
 
-- By importing `getPlaneTextFromEditorState` from `react-text-editor` 
+- By importing `getPlaneTextFromEditorState` from `@aashu0148/react-text-editor` 
 
 ```javascript
     
-import Editor, { getPlaneTextFromEditorState } from "react-text-editor";
+import Editor, { getPlaneTextFromEditorState } from "@aashu0148/react-text-editor";
 
 function App() {
   const [editorState, setEditorState] = useState("");
